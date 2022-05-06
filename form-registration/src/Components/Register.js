@@ -1,5 +1,5 @@
 import React from 'react';
-import Styled from 'styled-components';
+import styledComponents from 'styled-components';
 
 export default function Register(props) {
   let showIconClasses  = ["bi","show-password"];
@@ -12,16 +12,18 @@ export default function Register(props) {
     btnType = 'password';
   }
 
-  const styledButton = Styled.button`
-    display: inline-block;
-    color: palevioletred;
-    font-size: 1em;
-    margin: 1em;
-    padding: 0.25em 1em;
-    border: 2px solid palevioletred;
-    border-radius: 3px;
-    display: block;
-  `;
+  /* style component use */ 
+  // const Button = styledComponents.button`
+  //   display: inline-block;
+  //   color: palevioletred;
+  //   font-size: 1em;
+  //   margin: 1em;
+  //   padding: 0.25em 1em;
+  //   border: 2px solid palevioletred;
+  //   border-radius: 3px;
+  //   display: block;
+  //   background-color:blue;
+  // `;
 
 
   return (
@@ -61,7 +63,7 @@ export default function Register(props) {
                   <div className="d-grid mb-2">
                     <button className="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</button>
                   </div>
-                  <styledButton></styledButton>
+                  {/* <Button>Normal Button</Button> */}
                 </form>
               </div>
             </div>

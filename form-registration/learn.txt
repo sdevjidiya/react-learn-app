@@ -21,6 +21,10 @@ Two types: i) functional II) classbase
 -> Use state inside function component : useState ( hooks ) 
 
 ---------------------------------------------------------------------
+* firebase + uuid
+-> install : npm install --save firebase uuid
+
+---------------------------------------------------------------------
 * style Component
 https://styled-components.com/
 -> Library use to style component to use muti times with same style.
