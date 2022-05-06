@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Person } from './Component/Person';
+import Form from './Component/Form';
 import './App.css';
 
 export default class App extends Component {
@@ -64,6 +65,7 @@ export default class App extends Component {
         <button type='button' onClick={this.togglehandler}>Toggle</button>
         <h3>Users</h3>
         {persons}
+        <Form/>
       </div>
     )
   }
