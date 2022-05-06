@@ -8,41 +8,60 @@ export default class App extends Component {
     this.state = {
       persons : [
         {
-          id : 1,
+          id : 0,
           name : "John Doe",
           age: 22
         },
         {
-          id : 2,
+          id : 1,
           name : "James Roy",
           age: 25
         },
         {
-          id : 3,
+          id : 2,
           name : "Peter jack",
-          age: 24
+          age: 28
         },
         {
-          id : 4,
+          id : 3,
           name : "Henry jam",
           age: 24
         },
-      ]
-    }
+      ],
+      isShow : true,
+    };
+
+    this.togglehandler = this.togglehandler.bind(this);
   }
 
-  Togglehandler(){
-    alert();
+  togglehandler(){
+    console.log(this.state);
+    this.setState({ isShow : !this.state.isShow });
+  }
+
+  removeHandler = (id) => {
+    const personsCopy = this.state.persons;
+    // console.table(personsCopy);
+    // console.log(personsCopy[id]);
+    personsCopy.splice(id,1);
+    this.setState({ persons : personsCopy });
+    // console.table(personsCopy);
   }
 
   render() {
     let persons;
-    persons = this.state.persons.map( (p) => {
-      return <Person key={p.id} name={p.name} age={p.age}/>;
-    }); 
+    // second way to toggle
+    if(this.state.isShow){
+      persons = this.state.persons.map( (p,index) => {
+        return <Person key={index} name={p.name} age={p.age} remove = { () => this.removeHandler(index) }/>;
+      });
+    }
+    else{
+      persons = '';
+    }
     return (
       <div className='App'>
-        <button type='button' onClick={this.Togglehandler}>Toggle</button>
+        <button type='button' onClick={this.togglehandler}>Toggle</button>
         <h3>Users</h3>
         {persons}
       </div>
