@@ -1,0 +1,76 @@
+React JS : Javascript Library
+--------------------------
+1) Component:
+Two types: i) functional II) classbase
+-> Components are independent & reusable.
+-> Components are js files.
+-> This is returns Html to render function.
+
+2) Jsx : Js + HTML
+-> Extensions to Javascript language syntax.
+-> JSX = Javascript and XML
+
+3) Props
+-> use: if you create dynamic ui base component.
+-> In some cases, Components need to communicate ( send data to each other ) and the way to pass data between Components is using by props. 
+
+4) State
+-> state is built-in object.
+-> state object is used to store all data to particular component only.
+-> Use state inside class component : this.state  
+-> Use state inside function component : useState ( hooks ) 
+
+---------------------------------------------------------------------
+* style Component
+https://styled-components.com/
+-> Library use to style component to use muti times with same style.
+
+* Redux
+-> This Library use to state management.
+
+* Axios
+https://www.npmjs.com/package/axios
+-> Install this Library : npm install axios
+                          -----------------               
+-> Use to handle http request to our app external url.
+
+---------------------------------------------------------------------
+
+* Add css for particular component ( this css not apply on full page )
+-> to use module.css
+
+---------------------------------------------------------------------
+* Binding with Event handling.
+-> 4 way to event Binding.
+ex: 
+export class PersonEvent extends Component{
+  constructor(props){
+    super(props);
+    this.state = {};
+
+    // constructor binding
+    this.buttonClickhandler = this.buttonClickhandler.bind(this);
+  }
+  
+  // simple function to event this keyword rebind. 
+  buttonClickhandler(){
+    console.log(this);
+  }
+  //arrow function not rebind this keyword
+  buttonClickhandler = () => {
+   console.log(this.state);
+  }
+  render(){
+    return(
+      <div>
+        <h2>Event with component</h2>
+        <button type="button" onClick={this.buttonClickhandler}>Click</button> 
+        {/* binding method */}
+        <button type="button" onClick={() => this.buttonClickhandler()}>Click</button>
+        {/* Inline Binding */}
+        <button type="button" onClick={this.buttonClickhandler}>Click</button>
+      </div>
+    )
+  }
+}
+---------------------------------------------------------------------
