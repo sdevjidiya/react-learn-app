@@ -21,6 +21,11 @@ Two types: i) functional II) classbase
 -> Use state inside function component : useState ( hooks ) 
 
 ---------------------------------------------------------------------
+* React Route
+https://reactrouter.com/
+- npm install react-router-dom@6
+-> This package use to web app to routing.
+
 * firebase + uuid
 -> install : npm install --save firebase uuid
 
