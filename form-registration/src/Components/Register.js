@@ -56,14 +56,14 @@ export default function Register(props) {
                   </div>
 
                   <div className="form-floating mb-3">
-                    <input type={btnType} className="form-control" id="conpassword"/>
+                    <input type={btnType} className="form-control"  name='password' id="conpassword"/>
                     <label htmlFor="conpassword">Confirm Password</label>
                   </div>
 
                   <div className="d-grid mb-2">
                     <button className="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register</button>
                   </div>
-                  {/* <Button>Normal Button</Button> */}
+
                 </form>
               </div>
             </div>

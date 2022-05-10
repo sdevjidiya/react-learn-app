@@ -20,11 +20,54 @@ Two types: i) functional II) classbase
 -> Use state inside class component : this.state  
 -> Use state inside function component : useState ( hooks ) 
 
+5) State in functional component
+-> using useState hooks threw can use state.
+        ----------
+-> import useState.
+-> ex: const [username, setName] = useState("Guest");
+              --------  ---------
+              create    create 
+              state     state
+              name      function
+
+       Onclick = { () => { setName("Users"); } }
+
+6) Stateful & Stateless Component
+-> Component render only UI its called Stateless component.
+-> Component carry on State its called Statefull component.
+
+7) Component Lifecycle Method
+==> https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+* Mounting Component
+-> These methods are called following order : component is created and inserted
+    - constructor() 
+    - static  getDrivedStateFromprops()
+    - render()  
+    - componentDidMount()
+
+* Updating Component
+-> Any changes on Props & State then Components are re-render.
+    - state getDrivedStateFromProps
+    - shouldComponentUpdate()
+    - render()
+    - getSnapshotBeforeUpdate()
+    - componentDidUpdate()
+
+* Unmounting Component
+-> This method called when component are removed.
+    - componentWillUnmount()
 ---------------------------------------------------------------------
 * React Route
 https://reactrouter.com/
 - npm install react-router-dom@6
 -> This package use to web app to routing.
+
+==> If you use 6 version of route.
+- replace to switch in to routes
+                          ------
+- import : import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+- ex: <Route exact path="/" element={<><Home/></>}></Route>
+- 404: <Route exact path="*" element={<><Home/></>}></Route>
 
 * firebase + uuid
 -> install : npm install --save firebase uuid
@@ -42,6 +85,15 @@ https://www.npmjs.com/package/axios
 -> Install this Library : npm install axios
                           -----------------               
 -> Use to handle http request to our app external url.
+
+----- Axios Default Global Configuration ------
+-> Must be use this Configuration in index.js
+-> axios.defaults.baseURL = "https://....";
+-> axios.defaults.headers.common["AUTHORIZATION"] = "AUTH_TOKEN";
+
+OR : If you use deffrent Configuration in some Components. 
+--
+-> use of instance of axios.
 
 ---------------------------------------------------------------------
 
