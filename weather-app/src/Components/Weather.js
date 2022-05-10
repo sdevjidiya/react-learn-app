@@ -36,12 +36,12 @@ export default class Weather extends Component {
   };
 
   locationHandler = () => {
-    this.setState({
-      lat: "",
-      lon: "",
-      city: "",
-      weatherData: "",
-    }
+    // this.setState({
+    //   lat: "",
+    //   lon: "",
+    //   city: "",
+    //   weatherData: "",
+    // }
     navigator.geolocation.getCurrentPosition(
       (res) => {
         this.setState({
