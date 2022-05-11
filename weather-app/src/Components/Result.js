@@ -1,8 +1,18 @@
 import React from "react";
+import Loader from "./Loader";
 
-export default function Result() {
-  return (
-    <>
+export default function Result(props) {
+  const { weatherData: data } = props;
+
+  function kToc(k) {
+    return (k - 273.15).toFixed(2);
+  }
+
+  let isShow;
+  if (data === "") {
+    isShow = <Loader />;
+  } else {
+    isShow = (
       <div className="forecast-table">
         <div className="container">
           <div className="forecast-container">
@@ -12,14 +22,17 @@ export default function Result() {
                 <div className="date">6 Oct</div>
               </div>
               <div className="forecast-content">
-                <div className="location">New York</div>
+                <div className="location">
+                  {data.name} ( {data.weather[0].description} )
+                </div>
                 <div className="degree">
                   <div className="num">
-                    23<sup>o</sup>C
+                    {kToc(data.main.temp)}
+                    <sup>o</sup>C
                   </div>
                   <div className="forecast-icon">
                     <img
-                      src="assets/images/icons/icon-1.svg"
+                      src={`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`}
                       alt=""
                       width={90}
                     />
@@ -39,7 +52,7 @@ export default function Result() {
                 </span>
               </div>
             </div>
-            <div className="forecast">
+            {/* <div className="forecast">
               <div className="forecast-header">
                 <div className="day">Tuesday</div>
               </div>
@@ -146,10 +159,11 @@ export default function Result() {
                   18<sup>o</sup>
                 </small>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
-    </>
-  );
+    );
+  }
+  return <>{isShow}</>;
 }

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Search from "./Search";
 import Result from "./Result";
+import axios from "axios";
 
 export default class Weather extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       lat: "",
       lon: "",
@@ -32,22 +32,55 @@ export default class Weather extends Component {
         lon: e.target.value,
       });
     }
-    console.log(this.state);
+  };
+
+  searchHandler = () => {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=3863efe004b3c4ccbd77c534f524d164`
+      )
+      .then((result) => {
+        console.log(result);
+        this.setState({
+          city: result.data.name,
+          weatherData: result.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   locationHandler = () => {
-    // this.setState({
-    //   lat: "",
-    //   lon: "",
-    //   city: "",
-    //   weatherData: "",
-    // }
+    this.setState({
+      lat: "",
+      lon: "",
+      city: "",
+      weatherData: "",
+    });
+
     navigator.geolocation.getCurrentPosition(
       (res) => {
-        this.setState({
-          lat: res.coords.latitude,
-          lon: res.coords.longitude,
-        });
+        setTimeout(() => {
+          this.setState({
+            lat: res.coords.latitude,
+            lon: res.coords.longitude,
+          });
+          axios
+            .get(
+              `https://api.openweathermap.org/data/2.5/weather?lat=${res.coords.latitude}&lon=${res.coords.longitude}&appid=3863efe004b3c4ccbd77c534f524d164`
+            )
+            .then((result) => {
+              console.log(result);
+              this.setState({
+                city: result.data.name,
+                weatherData: result.data,
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }, 500);
       },
       (error) => {
         console.log(error);
@@ -66,8 +99,9 @@ export default class Weather extends Component {
             weatherData={this.state.weatherData}
             change={this.changeHandler}
             getLocation={this.locationHandler}
+            searchbtn={this.searchHandler}
           />
-          <Result />
+          <Result weatherData={this.state.weatherData} />
         </div>
       </>
     );

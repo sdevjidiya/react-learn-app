@@ -47,7 +47,11 @@ export default function Search(props) {
               value={props.lon}
               onChange={props.change}
             />
-            <button style={{ marginLeft: "10px" }}>
+            <button
+              type="button"
+              onClick={props.searchbtn}
+              style={{ marginLeft: "10px" }}
+            >
               <i className="fa fa-search"></i>
             </button>
           </form>
