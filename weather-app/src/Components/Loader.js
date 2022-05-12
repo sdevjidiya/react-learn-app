@@ -12,7 +12,7 @@ export default function Loader() {
           padding: "20px",
         }}
       >
-        <div class={loaderCss.loader}></div>
+        <div className={loaderCss.loader}></div>
       </div>
     </>
   );

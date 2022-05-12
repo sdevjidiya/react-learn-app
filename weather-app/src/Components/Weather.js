@@ -11,6 +11,8 @@ export default class Weather extends Component {
       lon: "",
       city: "",
       weatherData: "",
+      isSearch: false,
+      recent: [],
     };
   }
 
@@ -18,7 +20,7 @@ export default class Weather extends Component {
     // console.log(e.target.name);
     // console.log(e.target.city.value);
     const name = e.target.name;
-    console.log(name);
+    // console.log(name);
     if (name === "city") {
       this.setState({
         city: e.target.value,
@@ -34,48 +36,113 @@ export default class Weather extends Component {
     }
   };
 
+  componentDidMount() {
+    const recentData = window.localStorage.getItem("recent");
+    // console.log(recentData);
+    let recent = recentData == null ? [] : JSON.parse(recentData);
+    this.setState({ recent });
+  }
+
+  addDatarecent = () => {
+    const recent = this.state.recent;
+    recent.push({
+      lat: this.state.lat,
+      lon: this.state.lon,
+      city: this.state.city,
+    });
+    this.setState(
+      {
+        recent,
+      },
+      () => {
+        window.localStorage.setItem(
+          "recent",
+          JSON.stringify(this.state.recent)
+        );
+      }
+    );
+  };
+
+  recentReaserachHandler = (lat, lon) => {
+    // console.log(lat, lon);
+    this.setState(
+      {
+        weatherData: "",
+        lat: lat,
+        lon: lon,
+      },
+      () => {
+        axios
+          .get(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=3863efe004b3c4ccbd77c534f524d164`
+          )
+          .then((result) => {
+            this.setState({
+              city: result.data.name,
+              weatherData: result.data,
+            });
+          })
+          .catch((error) => {
+            // console.log(error);
+          });
+      }
+    );
+  };
+
   searchHandler = () => {
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=3863efe004b3c4ccbd77c534f524d164`
-      )
-      .then((result) => {
-        console.log(result);
-        this.setState({
-          city: result.data.name,
-          weatherData: result.data,
+    this.setState({
+      isSearch: true,
+      weatherData: "",
+    });
+    setTimeout(() => {
+      axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=3863efe004b3c4ccbd77c534f524d164`
+        )
+        .then((result) => {
+          this.setState(
+            {
+              city: result.data.name,
+              weatherData: result.data,
+            },
+            () => {
+              this.addDatarecent();
+            }
+          );
+        })
+        .catch((error) => {
+          // console.log(error);
         });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    }, 500);
   };
 
   locationHandler = () => {
     this.setState({
       lat: "",
       lon: "",
-      city: "",
-      weatherData: "",
+      isSearch: true,
     });
-
     navigator.geolocation.getCurrentPosition(
       (res) => {
+        this.setState({
+          lat: res.coords.latitude,
+          lon: res.coords.longitude,
+        });
         setTimeout(() => {
-          this.setState({
-            lat: res.coords.latitude,
-            lon: res.coords.longitude,
-          });
           axios
             .get(
-              `https://api.openweathermap.org/data/2.5/weather?lat=${res.coords.latitude}&lon=${res.coords.longitude}&appid=3863efe004b3c4ccbd77c534f524d164`
+              `https://api.openweathermap.org/data/2.5/weather?lat=${this.state.lat}&lon=${this.state.lon}&appid=3863efe004b3c4ccbd77c534f524d164`
             )
             .then((result) => {
-              console.log(result);
-              this.setState({
-                city: result.data.name,
-                weatherData: result.data,
-              });
+              this.setState(
+                {
+                  city: result.data.name,
+                  weatherData: result.data,
+                },
+                () => {
+                  this.addDatarecent();
+                }
+              );
             })
             .catch((error) => {
               console.log(error);
@@ -101,7 +168,12 @@ export default class Weather extends Component {
             getLocation={this.locationHandler}
             searchbtn={this.searchHandler}
           />
-          <Result weatherData={this.state.weatherData} />
+          <Result
+            weatherData={this.state.weatherData}
+            isSearch={this.state.isSearch}
+            recent={this.state.recent}
+            recentReaserach={this.recentReaserachHandler}
+          />
         </div>
       </>
     );

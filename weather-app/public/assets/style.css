@@ -1253,7 +1253,7 @@ form textarea {
         width: 16.6667%;
         float: left; } }
     .forecast-container .forecast.today {
-      width: 420px; }
+      width: 60%; }
       .forecast-container .forecast.today .forecast-header {
         *zoom: 1; }
         .forecast-container .forecast.today .forecast-header:after {
@@ -1298,8 +1298,20 @@ form textarea {
     .forecast-container .forecast .forecast-icon {
       height: 50px; }
     .forecast-container .forecast .forecast-content {
-      padding: 50px 20px 10px;
-      text-align: center; }
+      padding: 20px 20px 10px;
+     }
+     .forecast-content ul{
+       list-style: none;
+       margin-left: 10px;
+     }
+     .forecast-content ul li{
+      background: #009ad8;
+      color: white;
+      padding: 5px 20px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+     }
       .forecast-container .forecast .forecast-content .forecast-icon {
         margin-bottom: 20px; }
       .forecast-container .forecast .forecast-content .degree {

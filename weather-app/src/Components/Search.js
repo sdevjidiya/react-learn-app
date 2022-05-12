@@ -25,14 +25,14 @@ export default function Search(props) {
           <div>
             <h3>OR</h3>
           </div>
+          <div style={{ textAlign: "center", marginBottom: "20px" }}>
+            <label style={{ marginRight: "20px" }}>Co-ordinate</label>
+            <button type="button" onClick={props.getLocation}>
+              <i className="fa fa-crosshairs" aria-hidden="true"></i>
+            </button>
+            <br />
+          </div>
           <form>
-            <div style={{ textAlign: "center", marginBottom: "20px" }}>
-              <label style={{ marginRight: "20px" }}>Co-ordinate</label>
-              <button type="button" onClick={props.getLocation}>
-                <i className="fa fa-crosshairs" aria-hidden="true"></i>
-              </button>
-              <br />
-            </div>
             <label className="lat-label">Lat</label>
             <input
               type="number"

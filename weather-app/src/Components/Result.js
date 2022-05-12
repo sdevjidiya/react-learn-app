@@ -1,5 +1,6 @@
 import React from "react";
 import Loader from "./Loader";
+import Recent from "./Recent";
 
 export default function Result(props) {
   const { weatherData: data } = props;
@@ -10,12 +11,25 @@ export default function Result(props) {
 
   let isShow;
   if (data === "") {
-    isShow = <Loader />;
+    if (props.isSearch === true) {
+      isShow = <Loader />;
+    } else {
+      isShow = (
+        <>
+          <div style={{ padding: "30px", textAlign: "center" }}>
+            <h2>Please search city....</h2>
+          </div>
+        </>
+      );
+    }
   } else {
     isShow = (
       <div className="forecast-table">
         <div className="container">
           <div className="forecast-container">
+            <div className="forecast">
+              <Recent recent={props.recent} reasearch={props.recentReaserach} />
+            </div>
             <div className="today forecast">
               <div className="forecast-header">
                 <div className="day">Monday</div>
@@ -52,114 +66,6 @@ export default function Result(props) {
                 </span>
               </div>
             </div>
-            {/* <div className="forecast">
-              <div className="forecast-header">
-                <div className="day">Tuesday</div>
-              </div>
-              <div className="forecast-content">
-                <div className="forecast-icon">
-                  <img src="assets/images/icons/icon-3.svg" alt="" width={48} />
-                </div>
-                <div className="degree">
-                  23<sup>o</sup>C
-                </div>
-                <small>
-                  18<sup>o</sup>
-                </small>
-              </div>
-            </div>
-            <div className="forecast">
-              <div className="forecast-header">
-                <div className="day">Wednesday</div>
-              </div>
-              <div className="forecast-content">
-                <div className="forecast-icon">
-                  <img src="assets/images/icons/icon-5.svg" alt="" width={48} />
-                </div>
-                <div className="degree">
-                  23<sup>o</sup>C
-                </div>
-                <small>
-                  18<sup>o</sup>
-                </small>
-              </div>
-            </div>
-            <div className="forecast">
-              <div className="forecast-header">
-                <div className="day">Thursday</div>
-              </div>
-              <div className="forecast-content">
-                <div className="forecast-icon">
-                  <img src="assets/images/icons/icon-7.svg" alt="" width={48} />
-                </div>
-                <div className="degree">
-                  23<sup>o</sup>C
-                </div>
-                <small>
-                  18<sup>o</sup>
-                </small>
-              </div>
-            </div>
-            <div className="forecast">
-              <div className="forecast-header">
-                <div className="day">Friday</div>
-              </div>
-              <div className="forecast-content">
-                <div className="forecast-icon">
-                  <img
-                    src="assets/images/icons/icon-12.svg"
-                    alt=""
-                    width={48}
-                  />
-                </div>
-                <div className="degree">
-                  23<sup>o</sup>C
-                </div>
-                <small>
-                  18<sup>o</sup>
-                </small>
-              </div>
-            </div>
-            <div className="forecast">
-              <div className="forecast-header">
-                <div className="day">Saturday</div>
-              </div>
-              <div className="forecast-content">
-                <div className="forecast-icon">
-                  <img
-                    src="assets/images/icons/icon-13.svg"
-                    alt=""
-                    width={48}
-                  />
-                </div>
-                <div className="degree">
-                  23<sup>o</sup>C
-                </div>
-                <small>
-                  18<sup>o</sup>
-                </small>
-              </div>
-            </div>
-            <div className="forecast">
-              <div className="forecast-header">
-                <div className="day">Sunday</div>
-              </div>
-              <div className="forecast-content">
-                <div className="forecast-icon">
-                  <img
-                    src="assets/images/icons/icon-14.svg"
-                    alt=""
-                    width={48}
-                  />
-                </div>
-                <div className="degree">
-                  23<sup>o</sup>C
-                </div>
-                <small>
-                  18<sup>o</sup>
-                </small>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
