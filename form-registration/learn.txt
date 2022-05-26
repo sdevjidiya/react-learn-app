@@ -93,7 +93,7 @@ https://www.npmjs.com/package/axios
 
 OR : If you use deffrent Configuration in some Components. 
 --
--> use of instance of axios.
+-> use instance of axios.
 
 ---------------------------------------------------------------------
 
