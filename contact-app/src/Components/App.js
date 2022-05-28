@@ -5,8 +5,8 @@ import AddContact from "./AddContact";
 import ContactList from "./ContactList";
 
 function App() {
-  const LOCAL_STORAGE_KEY = "contacts";
-  const [contacts, setContacts] = useState([]);
+  const LOCAL_STORAGE_KEY = "con";
+  const [contactsData, setContacts] = useState([]);
 
   // const contacts = [
   //   {
@@ -27,24 +27,26 @@ function App() {
   // ];
 
   const addContactHandler = (contact) => {
-    setContacts([...contacts, contact]);
     // console.log(contacts);
+    setContacts([...contactsData, contact]);
   };
 
   useEffect(() => {
-    const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if (retriveContacts) setContacts(retriveContacts);
+    // console.log("contacts", setContacts);
+    const retriveContact = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+    setContacts(retriveContact);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
-  }, [contacts]);
+    console.log("contacts", setContacts);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contactsData));
+  }, [contactsData]);
 
   return (
     <div className="ui container">
       <Header />
       <AddContact addContactHandler={addContactHandler} />
-      <ContactList contacts={contacts} />
+      <ContactList contacts={contactsData} />
     </div>
   );
 }
